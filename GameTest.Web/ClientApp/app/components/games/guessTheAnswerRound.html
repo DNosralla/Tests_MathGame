@@ -1,0 +1,71 @@
+﻿<template>
+
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        GuessTheAnswer
+    </div>
+
+    <table class="table table-condensed table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="col-xs-2 text-center">Round</th>
+                <th class="col-xs-4 text-left">Expression</th>
+                <th class="col-xs-2 text-center">Your Answer</th>
+                <th class="col-xs-2 text-center">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr repeat.for="r of rounds">
+                <!--round number-->
+                <td>${r.roundNumber}</td>
+
+                <!--expression-->
+                <td class="text-left">${r.expression}</td>
+
+                <!--your answer-->
+                <td>
+
+                    <!--answered round-->
+                    <span if.bind="r.givenAnswer != undefined">
+                        <span>${r.givenAnswer}</span>
+                    </span>
+
+                    <!--missed round-->
+                    <span if.bind="r.givenAnswer == undefined && r.winner != null">
+                        Missed
+                    </span>
+
+                    <!--open round-->
+                    <span if.bind="r.winner == undefined && r.givenAnswer == undefined">
+                        <input type="text" class="form-control answerTxt" value.bind="r.inputAnswer" />
+                        <button type="button" click.delegate="giveAnswer(r, r.inputAnswer)"><span class="fa fa-arrow-right"></span></button>
+                    </span>
+                </td>
+
+                <!--result-->
+                <td>
+
+                    <!--somebody won-->
+                    <span if.bind="r.winner != undefined">
+                        <!--I Won-->
+                        <span class="wonText" if.bind="r.winner.connectionId == player.connectionId">
+                            Ok <span class="fa fa-trophy faa-pulse animated"></span>
+                        </span>
+
+                        <!--I Lost to someone-->
+                        <span class="lostText" if.bind="r.winner.connectionId != player.connectionId">
+                            Fail
+                        </span>
+                    </span>
+
+                    <!--timer running-->
+                    <span if.bind="r.timeLeft != undefined && r.winner == undefined">
+                        ${r.timeLeft} <span class="fa fa-hourglass faa-flash animated"></span>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</template>

@@ -1,0 +1,42 @@
+﻿.panel {
+    color: black;
+}
+
+.leftContainer {
+    height: 600px;
+}
+
+    .leftContainer .playerList {
+        height: 96%;
+    }
+
+.centerContainer {
+    height: 600px;
+}
+
+    .centerContainer .roundList {
+        height: 96%;
+    }
+
+.footerContainer {
+    height: 150px;
+}
+
+    .footerContainer .messageList {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100%;
+    }
+
+.wonText {
+    color: green;
+}
+
+.lostText {
+    color: red;
+}
+
+.answerTxt {
+    width: 60px;
+    display: inline;
+}

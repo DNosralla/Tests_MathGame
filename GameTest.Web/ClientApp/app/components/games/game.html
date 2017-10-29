@@ -1,0 +1,60 @@
+<template>
+    <!--main game--> 
+    <div class="row">
+
+        <div class="col-sm-3 leftContainer">
+
+            <div class="panel playerList">
+                
+                <div class="panel-heading">Players online: ${playerList.length}</div>
+
+                <table class="table table-condensed">
+                    <tbody>
+                        <tr repeat.for="p of playerList">
+                            <td>
+                                <span if.bind="p.name == player.name"><strong>${p.name}</strong></span>
+                                <span if.bind="p.name != player.name">${p.name}</span>
+                            </td>
+                            <td>
+                                <span>(${p.score})</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-9 centerContainer">
+
+            <div class="panel panel-info roundList" if.bind="roundTemplate == 'GuessTheAnswer'">
+                <compose view="./guessTheAnswerRound.html" model.bind="$data"></compose>
+            </div>
+
+            <div class="panel panel-info roundList" if.bind="roundTemplate == 'RightOrWrong'">
+                <compose view="./rightOrWrongRound.html" model.bind="$data"></compose>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--message footer-->
+    <div class="row">
+        <div class="col-sm-12 footerContainer">
+            <div class="panel panel-info messageList">
+                
+                <table class="table table-condensed ">
+                    <tbody>
+                        <tr repeat.for="m of messages">
+                            <td innerhtml.bind="m"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</template>
